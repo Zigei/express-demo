@@ -19,26 +19,24 @@ module.exports = {
         let repassword = req.fields.repassword;
         let errorMsg = "";
         if (!(name.length >= 1 && name.length <= 10)) {
-            errorMsg = '名字请限制在 1-10 个字符';
+            return '名字请限制在 1-10 个字符';
         }
         if (['m', 'f', 'x'].indexOf(gender) === -1) {
-            errorMsg = '性别只能是 m、f 或 x';
+            return '性别只能是 m、f 或 x';
         }
         if (!(bio.length >= 1 && bio.length <= 30)) {
-            errorMsg = '个人简介请限制在 1-30 个字符';
+            return '个人简介请限制在 1-30 个字符';
         }
         if (!req.files.avatar.name) {
-            errorMsg = '缺少头像';
+            return '缺少头像';
         }
         if (password.length < 6) {
-            errorMsg = '密码至少 6 个字符';
+            return '密码至少 6 个字符';
         }
         if (password !== repassword) {
-            errorMsg = '两次输入密码不一致';
+            return '两次输入密码不一致';
         }
-        if(errorMsg !== ""){
-            return errorMsg;
-        }
+        
         password = sha1(password);
         return  {
             name: name,
