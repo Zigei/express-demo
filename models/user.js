@@ -1,4 +1,6 @@
 const User = require('../lib/mongo').User;
+const path = require('path');
+const sha1 = require('sha1');
 
 module.exports = {
     create: (user) => {
